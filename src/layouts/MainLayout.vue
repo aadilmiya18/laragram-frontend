@@ -1,16 +1,23 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" class="tw-bg-black">
     <q-header elevated>
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title> Quasar App </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>
+          <q-btn
+            label="Logout"
+            unelevated
+            no-caps
+            @click="store.logout"
+          />
+        </div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered class="tw-bg-black tw-text-white">
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 
@@ -27,6 +34,9 @@
 <script setup>
 import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import { useAuthStore } from 'stores/authStore.js'
+
+const store = useAuthStore()
 
 const linksList = [
   {
